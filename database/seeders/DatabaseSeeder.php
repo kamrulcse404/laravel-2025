@@ -3,7 +3,10 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+
+use Faker\Factory;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class DatabaseSeeder extends Seeder
 {
@@ -12,11 +15,18 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // \App\Models\User::factory(10)->create();
+        $faker = Factory::create();
 
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
+
+        for ($i=0; $i < 100; $i++) {
+            DB::table('products')->insert([
+                'name' => $faker->realText(),
+                'seller_name' => $faker->name(),
+                'description' => $faker->realText(),
+                'price' => (float) random_int(10, 100),
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]);
+        }
     }
 }
