@@ -15,18 +15,6 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        $faker = Factory::create();
-
-
-        for ($i=0; $i < 100; $i++) {
-            DB::table('products')->insert([
-                'name' => $faker->realText(),
-                'seller_name' => $faker->name(),
-                'description' => $faker->realText(),
-                'price' => (float) random_int(10, 100),
-                'created_at' => now(),
-                'updated_at' => now(),
-            ]);
-        }
+        $this->call(ProductSeeder::class);
     }
 }
